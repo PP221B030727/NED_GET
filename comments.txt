@@ -1,0 +1,19 @@
+python3 -m venv MyVirtualVenv --- Создал вертуальное окружения 
+source MyVirtualVenv/bin/activate - активируем 
+deactivate --- dsrk.xbnmd
+djang-admin --- команды
+django-admin startproject MyStore
+python3 manage.py runserver
+
+python3 manage.py runserver 4000
+
+
+python manage.py startapp testapp
+https://youtu.be/XG-99CTkWiM
+
+
+python manage.py shell
+
+
+{% if ... %}
+{% endif %}
