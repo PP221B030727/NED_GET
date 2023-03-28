@@ -17,3 +17,8 @@ python manage.py shell
 
 {% if ... %}
 {% endif %}
+
+
+python3  manage.py makemigrations
+python3 manage.py migratec
+
