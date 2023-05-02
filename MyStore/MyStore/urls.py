@@ -17,13 +17,17 @@ from django.contrib import admin
 from django.urls import path , include
 from django.conf.urls.static import static
 from django.conf import settings
-from products.views.main_views import index
+
+import products
+# from products import views
+from products.views.fbv import *
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index, name='index'),
+    path('categories/', category_list),
+    path('categories/<int:category_id>/', category_detail),
     path('products/', include('products.urls', namespace = 'products')),
 ]
-if(settings.DEBUG):
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# if(settings.DEBUG):
+#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

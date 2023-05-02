@@ -1,9 +1,8 @@
 from django.urls import path
-from products.views.main_views import products
+from products.views.cbv import *
 
 app_name = 'products'
 urlpatterns = [
-    path('',products,name = 'index')
-
-
+    path('', ProductListAPIView.as_view()),
+    path('<int:product_id>/', ProductDerailAPIView.as_view()),
 ]
