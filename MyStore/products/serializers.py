@@ -2,6 +2,7 @@ from products.models import *
 from rest_framework import serializers
 from users.models import User
 
+#------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 class CategorySerializer(serializers.Serializer):
@@ -18,6 +19,7 @@ class CategorySerializer(serializers.Serializer):
         return instance
 
 
+#------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 class ModelCategorySerializer(serializers.ModelSerializer):
@@ -28,24 +30,32 @@ class ModelCategorySerializer(serializers.ModelSerializer):
 
 
 
+#------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'phone_number', 'image')
+        fields = '__all__'
 
 
+#------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-
+class ModelCommentSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+    class Meta:
+        model = Comment
+        fields = ('id','user','content','commment_date')
 
 
 class ModelProductSerializer(serializers.ModelSerializer):
     category_name = serializers.CharField(source='category.name', read_only=True)
-    comments = UserSerializer(many = True)
+    # comments = ModelCommentSerializer(many = True)
+    comments = ModelCommentSerializer(many = True)
+    # print(comments)
 
     class Meta:
         model = Product
-        fields = ('id', 'name', 'description', 'price', 'quontity', 'category', 'category_name','is_active', 'rating_value', 'rating_count', 'comments')
+        fields = '__all__'
 
     def update(self, instance, validated_data):
         instance.name = validated_data.get('name', instance.name)
@@ -62,7 +72,7 @@ class ModelProductSerializer(serializers.ModelSerializer):
 
         return instance
 
-
+#------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -70,11 +80,7 @@ class ModelProductSerializer(serializers.ModelSerializer):
     #     product = Product.objects.create(**validated_data)
     #     return product
 
+#------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-# class ModelCommentSerializer(serializers.ModelSerializer):
-#     user = UserSerializer(read_only=True)
-#     product = ModelProductSerializer(read_only=True)
-#     class Meta:
-#         model = Comment
-#         fields = ('id', 'user', 'product', 'content', 'commment_date')
+
